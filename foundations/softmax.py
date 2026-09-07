@@ -8,15 +8,9 @@ class Solution:
         # z is a 1D NumPy array of logits
         # Hint: subtract max(z) for numerical stability before computing exp
         # return np.round(your_answer, 4)
-        largest = np.max(z)
+        # So whats good about numpy is that we can do calcs in bulk
+        z = z - np.max(z)
+        z = np.exp(z)
+        probs = z / np.sum(z)
 
-        for i, val in enumerate(z):
-            z[i] = np.exp(val - largest)
-        
-        ans = np.array([], dtype=np.float64)
-        summation = np.sum(z)
-
-        for val in z:
-            ans = np.append(ans, val/summation, axis=None)
-
-        return np.round(ans, 4)
+        return np.round(probs, 4)

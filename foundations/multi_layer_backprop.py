@@ -36,7 +36,7 @@ class Solution:
         z1 = W1 @ x + b1
         a1 = self.reLu(z1)
         z2 = W2 @ a1 + b2
-        preds = self.reLu(z2)
+        preds = z2
         loss = self.MSE_loss(preds, y_true)
 
         # Backward

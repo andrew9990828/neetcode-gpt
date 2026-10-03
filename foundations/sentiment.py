@@ -14,10 +14,10 @@ class Solution(nn.Module):
 
     def forward(self, x: TensorType[int]) -> TensorType[float]:
         # x.shape -> B, T
-        emb_dim = self.embeddings(x)    # [B, T, D]
-        emb_dim = torch.mean(emb_dim, dim=1)    # [B]
-        z = self.linear(emb_dim)    
-        out = self.sigmoid(z)
+        emb_dim = self.embeddings(x)    # [B, T, 16]
+        emb_dim = torch.mean(emb_dim, dim=1)    # [B, 16]
+        z = self.linear(emb_dim)    # [B, 1]
+        out = self.sigmoid(z)   #[B, 1]
         return torch.round(out, decimals=4)
         # Hint: The embedding layer outputs a B, T, embed_dim tensor
         # but you should average it into a B, embed_dim tensor before using the Linear layer
